@@ -1,0 +1,188 @@
+<br> <br>
+<main class="auth">
+
+  <div class="container" *ngIf="deviceType == 'web'">
+    <br>
+    <div class="border rounded">
+      <div class="row">
+        <div class="col-lg-6 border-right pr-0">
+          <div class="p-3">
+            <br> <br>
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img [src]="urlGlobal+primerBanner" class="d-block w-100 rounded" *ngIf="primerBanner != ''">
+                </div>
+                <div class="carousel-item" *ngFor="let x of banners">
+                  <img [src]="urlGlobal+x.imagen" class="d-block w-100 rounded" *ngIf="x.imagen != '' ">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center">
+          <div class="p-5">
+            <div class="text-center">
+              <img src="./assets/images/logo-flm.png" width="280px" style="padding-top: 30px" />
+            </div>
+
+            <hr />
+            <p>
+              ¿No tienes cuenta en COAC Virtual?
+              <a class="badge badge-primary font-weight-normal p-2" routerLink="/register" style="font-size: 12px;">
+                <i class="far fa-user-circle"></i> Crear Cuenta
+              </a>
+            </p>
+            <!-- form -->
+            <div class="text-center" style="text-align: center !important;">
+              <form class="mb-2 " [formGroup]="loginForm" (ngSubmit)="callUser()">
+                <!-- .form-group -->
+                <div class="form-group">
+                  <div class="form-label-group">
+                    <input type="text" id="inputUser" class="form-control" placeholder="Usuario (Ej. Jose78)"
+                      autofocus="" formControlName="nick" autocomplete="off" />
+                    <label for="inputUser">Usuario (Ej. Jose78)</label>
+                    <p class="col text-danger" *ngIf="NotValid('nick')" style="font-size: small"></p>
+                  </div>
+                </div>
+                <!-- /.form-group -->
+                <!-- .form-group -->
+                <div class="form-group">
+                  <div class="input-wrapper">
+                    <div class="form-label-group">
+                      <input type="password" id="inputPassword" class="form-control" placeholder="Clave"
+                        formControlName="password" [type]="getType()" autocomplete="off" />
+                      <label for="inputPassword">Contraseña</label>
+                      <p class="col text-danger" *ngIf="NotValid('password')" style="font-size: small"></p>
+                    </div>
+                    <i class="fas fa-eye input-icon password cursorp" (click)="toggleTextPassword()"
+                      *ngIf="!passEstado"></i>
+                    <i class="fas fa-eye-slash input-icon password cursorp" (click)="toggleTextPassword()"
+                      *ngIf="passEstado"></i>
+                  </div>
+                </div>
+                <!-- /.form-group -->
+                <!-- .form-group -->
+                <div class="form-group">
+                  <button class="btn btn-lg btn-primary btn-block" type="submit">
+                    Iniciar sesión
+                  </button>
+                </div>
+                <!-- /.form-group -->
+              </form>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="alert alert-info" role="alert">
+      <h4><b>Cuida tus credenciales de acceso</b></h4>
+      <ul>
+        <li>
+          Verificar que en tu navegador aparezca la dirección: https://bdfl.futurolamanense.fin.ec
+        </li>
+        <li class="mt-3">
+          Nunca solicitamos tus credenciales por ningún medio
+        </li>
+        <li class="mt-3">
+          Actualiza peridicamente tu contraseña
+        </li>
+        <li class="mt-3">
+          No solicitamos actualización de datos de manera virtual
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container" *ngIf="deviceType == 'movil'">
+
+    <div class="text-center mt-3">
+      <img src="../../../assets/images/logo-flm.png" class="w-75">
+      <hr />
+      <p>
+        ¿No tienes cuenta en COAC Virtual?
+        <a class="badge badge-primary font-weight-normal p-2" routerLink="/register" style="font-size: 12px;">
+          <i class="far fa-user-circle"></i> Crear Cuenta
+        </a>
+      </p>
+    </div>
+
+    <div class="text-center" style="text-align: center !important;">
+      <form class="mb-2 " [formGroup]="loginForm" (ngSubmit)="callUser()">
+        <!-- .form-group -->
+        <div class="form-group">
+          <div class="form-label-group">
+            <input type="text" id="inputUser" class="form-control" placeholder="Usuario (Ej. Jose78)" autofocus=""
+              formControlName="nick" autocomplete="off" />
+            <label for="inputUser">Usuario (Ej. Jose78)</label>
+            <p class="col text-danger" *ngIf="NotValid('nick')" style="font-size: small"></p>
+          </div>
+        </div>
+        <!-- /.form-group -->
+        <!-- .form-group -->
+        <div class="form-group">
+          <div class="input-wrapper">
+            <div class="form-label-group">
+              <input type="password" id="inputPassword" class="form-control" placeholder="Clave"
+                formControlName="password" [type]="getType()" autocomplete="off" />
+              <label for="inputPassword">Clave</label>
+              <p class="col text-danger" *ngIf="NotValid('password')" style="font-size: small"></p>
+            </div>
+            <i class="fas fa-eye input-icon password cursorp" (click)="toggleTextPassword()" *ngIf="!passEstado"></i>
+            <i class="fas fa-eye-slash input-icon password cursorp" (click)="toggleTextPassword()"
+              *ngIf="passEstado"></i>
+          </div>
+        </div>
+        <!-- /.form-group -->
+        <!-- .form-group -->
+        <div class="form-group">
+          <button class="btn btn-lg btn-primary btn-block" type="submit">
+            Iniciar sesión
+          </button>
+        </div>
+        <!-- /.form-group -->
+      </form>
+    </div>
+
+    <br>
+    <div class="alert alert-info" role="alert">
+      <h4><b>Cuida tus credenciales de acceso</b></h4>
+      <ul>
+        <li>
+          Verificar que en tu navegador aparezca la dirección: https://bdfl.futurolamanense.fin.ec
+        </li>
+        <li class="mt-3">
+          Nunca solicitamos tus credenciales por ningún medio
+        </li>
+        <li class="mt-3">
+          Actualiza peridicamente tu contraseña
+        </li>
+        <li class="mt-3">
+          No solicitamos actualización de datos de manera virtual
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+
+
+
+  <!--button type="button" class="btn btn-light btn-block text-primary" data-toggle="skin">
+    <span class="d-compact-menu-none">Modo nocturno</span>
+    <i class="fas fa-moon ml-1"></i>
+  </button-->
+
+  <!-- /.auth-form -->
+  <!-- copyright -->
+  <footer class="auth-footer">
+    <br>
+    <div class="copyright">© {{ anio }} By Departamento de TI COAC Futuro Lamanense.</div>
+    <br>
+  </footer>
+</main>
+<!-- /.auth -->

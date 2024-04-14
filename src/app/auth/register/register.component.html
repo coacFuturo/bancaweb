@@ -1,0 +1,524 @@
+<main class="auth">
+  <br>
+  <img src="../../../assets/images/lghorizontal.svg" width="250px" />
+  <hr />
+  <p>
+    ¿Ya tienes cuenta en MiFuturo?
+    <a class="badge badge-primary font-weight-normal p-2" routerLink="/login">
+      <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+    </a>
+  </p>
+  <!-- form -->
+  <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="newUser()" autocomplete="false">
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <input autofocus="" type="text" id="inputUser" class="form-control" placeholder="Identificación"
+          formControlName="cedula" />
+        <label for="inputUser">Identificación</label>
+        <p class="text-danger mt-1 pl-1 rounded pt-1 pb-1 border border-danger" *ngIf="NotValid('cedula')"
+          style="font-size: small">
+          *El campo Identificación es obligatorio
+        </p>
+      </div>
+    </div>
+    <!-- /.form-group -->
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <input type="text" id="inputCuentar" class="form-control" placeholder="Número de Cuenta"
+          formControlName="cuenta" />
+        <label for="inputCuentar">Número de Cliente</label>
+        <p class="text-danger mt-1 pl-1 rounded pt-1 pb-1 border border-danger" *ngIf="NotValid('cuenta')"
+          style="font-size: small">
+          *El campo Codigo de Cliente es obligatorio
+        </p>
+      </div>
+    </div>
+    <!-- /.form-group -->
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        <input type="text" id="inputNameUser" class="form-control" placeholder="Nombre de Usuario (Ej. Jose78)"
+          formControlName="nick" />
+        <label for="inputNameUser">Nombre de Usuario (Ej. Jose78)</label>
+        <p class="text-danger mt-1 pl-1 rounded pt-1 pb-1 border border-danger" *ngIf="NotValid('nick')"
+          style="font-size: small">
+          *El campo Usuario es obligatorio
+        </p>
+      </div>
+    </div>
+    <!-- /.form-group -->
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="tasks" style="height: 300px; width: 100%">
+        <!-- .tasks-header -->
+        <div class="task-header">
+          <h3>
+            <strong>Terminos y Condiciones de Uso</strong>
+          </h3>
+        </div>
+        <!-- /.tasks-header -->
+        <!-- .task-body -->
+        <div class="task-body" data-toggle="sortable" data-group="tasks" data-delay="50" data-force-fallback="true">
+          <!-- .task-issue -->
+          <div class="task-issue">
+            <!-- .card -->
+            <div class="card">
+              <!-- .card-header -->
+              <div class="card-header">
+                <p class="text-justify">
+                  Los términos y condiciones definidos en el presente documento, entre el Socio como Usuario y la
+                  Cooperativa de Ahorro y Crédito “Futuro Lamanense” en calidad de administrador principal de las
+                  aplicaciones “Billetera Digital” mostrando todos los derechos que contiene sobre la misma y la
+                  capacidad
+                  para autorizar el acceso y uso de la misma.
+                </p>
+                <p class="text-justify">
+                  El Socio, en uso de sus facultades legales, declara que conoce,
+                  acepta y autoriza lo siguiente:
+                </p>
+              </div>
+              <!-- /.card-header -->
+              <hr />
+              <div class="card-body pt-0" style="text-size-adjust: 8">
+                <a href="#" class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">1</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      Los canales digitales de la COAC FUTURO LAMANENSE son los
+                      medios a través de los cuales se atienden a los Socios de
+                      COAC FUTURO LAMANENSE que solicitan el(los) producto(s) o
+                      (los) servicio(s) financiero(s) y/o aquellos mecanismos a
+                      través de los cuales se hace efectiva la contraprestación
+                      de los servicios aceptados, y pagados cuando corresponda,
+                      por sus Socios.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">2</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      El uso de los canales digitales de la COAC FUTURO LAMANENSE
+                      consiste en permitir al Socio el establecimiento de una
+                      comunicación vía internet en el primer caso, y vía teléfono
+                      celular móvil con capacidad gráfica y acceso a internet en
+                      el segundo caso, con el sistema de computación de la
+                      Cooperativa, con el propósito de facilitar la realización de
+                      transacciones u operaciones financieras establecidas en el
+                      menú de funciones de cada servicio.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">3</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      Explicar al SOCIO sobre la obligación de mantener bajo su custodia, confidencialidad y seguridad
+                      la
+                      clave de acceso que se le género, de tal forma que ninguna persona pueda acceder a ellas,
+                      utilizarlas o conocerlas por cualquier medio.
+                    </p>
+                    <p class="text-justify">
+                      Mantener bajo su custodia, confidencialidad y seguridad , su usuario y contraseña que le fue
+                      generada para acceder a los CANALES DIGITALES de la Cooperativa, de tal forma que ninguna persona
+                      pueda acceder a ellas, utilizarlas o conocerlas por cualquier medio sea físico o electrónico; por
+                      lo
+                      tanto el SOCIO, asume ante La Cooperativa y ante terceros todos los riesgos y responsabilidades a
+                      que se den por cualquier uso indebido a causa del descuido en la custodia de las claves para el
+                      ingreso a los CANALES DIGITALES, liberando a LA COOPERATIVA de los perjuicios que se deriven del
+                      incumplimiento de esta obligación.
+                    </p>
+                    <p class="text-justify">
+                      El uso del usuario y clave para operar los canales digitales
+                      de la COAC FUTURO LAMANENSE es personal e intransferible,
+                      por lo cual, no compartirá la clave personal con ninguna
+                      tercera persona. Es de cumplimento obligatorio acatar las
+                      medidas de seguridad en los canales electrónicos que la
+                      Cooperativa brinda, las cuales garantizan el control de la
+                      información que proporciona la Cooperativa y la seguridad de
+                      las transacciones realizadas a través de sus canales
+                      electrónicos. Para el correcto manejo de las transacciones a
+                      través de los canales electrónicos, dentro de las
+                      condiciones y límites máximos que la Cooperativa establezca,
+                      se compromete a dar toda la información que el sistema le
+                      solicite.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">4</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      LA COOPERATIVA no asume responsabilidad alguna por los errores o inconsistencias que se presenten
+                      en la realización de pagos y/o transferencias efectuadas por el SOCIO, ya sea este por error
+                      humano o por un fallo del dispositivo que usaron para las transacciones.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">5</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      LA COOPERATIVA no realizará reversión alguna sobre las sumas transferidas y/o pagadas, una vez
+                      realizadas las transferencias y/o pagos de acuerdo con las órdenes impartidas por el SOCIO a
+                      través de los CANALES DIGITALES.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">6</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      El Socio deberá mantener actualizada su información en LA COOPERATIVA cada vez que se realicen
+                      cambios en su correo electrónico o número telefónico, con la finalidad de poder brindar un mejor
+                      servicio.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">7</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      De conformidad con la Ley de Comercio Electrónico, Firmas
+                      Electrónicas y Mensajería de Datos y su respectivo
+                      reglamento, se reconoce desde ya como válidas las claves que
+                      la Cooperativa le proporcione y que el Socio luego
+                      actualiza, con el objeto de ser utilizada en las
+                      transacciones que realice, siendo esto una aceptación
+                      expresa de la transacción. Consecuentemente, y aun cuando
+                      tales claves no se encuentren indisolublemente asociadas o
+                      respaldadas en firmas manuscritas conservadas por la
+                      Cooperativa, en un registro o soporte papel, reconoce que
+                      dichas claves tendrán igual validez e idénticos efectos
+                      jurídicos que una firma autógrafa, por lo cual, autoriza a
+                      la Cooperativa que proceda según dichas instrucciones, sin
+                      que sea necesario por parte de la Cooperativa confirmación o
+                      requisito adicional alguno.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">8</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      El Socio deberá reportar a LA COOPERATIVA, inmediatamente ya sea de forma personal, telefónica o
+                      por escrito al correo Institucional que la Cooperativa pone al servicio de sus socios, en el
+                      momento que tenga conocimiento que su ID y/o contraseña ha sido perdida, sustraída o usada
+                      ilegalmente, para que se proceda a bloquear el uso de los CANALES DIGITALES. En caso de no
+                      hacerlo, deslinda a LA COOPERATIVA de la responsabilidad sobre transacciones realizadas en su
+                      cuenta de los CANALES DIGITALES.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">9</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      La Cooperativa mantendrá en sus sistemas controles y
+                      resguardos que garanticen las seguridades tecnológicas del
+                      acceso a los canales electrónicos y de las transacciones que
+                      se realicen a través de los mismos, tomando en cuenta los
+                      riesgos inherentes a la operatividad. <br />
+                      La COAC podrá en cualquier momento bloquear o inactivar los
+                      canales electrónicos por los siguientes motivos: (1) En caso
+                      de detectar cualquier intento o alteración de su código,
+                      configuración y/o funcionalidad; (2) Cuando se presenten
+                      eventos inusuales que adviertan situaciones fraudulentas;
+                      (3) Después de un número máximo de tres intentos de acceso
+                      fallido y que además serán notificados mediante mensajería
+                      móvil, correo electrónico u otro mecanismo, y su
+                      reactivación debe solicitarla en las oficinas de la COAC
+                      FUTURO LAMANENSE de manera segura, Sin perjuicio de lo
+                      anterior, el Socio acepta que la COAC. proceda a suspender
+                      de manera automática y temporal el acceso a los canales
+                      electrónicos y de los servicios que brindan, sin necesidad
+                      de comunicación de por medio, pasados los 6 meses de
+                      inactividad o desuso de los mismos por parte de El Socio,
+                      hasta que este último proceda a la actualización de sus
+                      datos y entrega de la documentación requerida, de
+                      conformidad con la normativa correspondiente y las políticas
+                      establecidas por la Cooperativa; para su reactivación, el
+                      Socio deberá tomar contacto con la COAC y seguir las
+                      instrucciones que este le imparta.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">10</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      Se recomienda al Socio que realice las transacciones a través del internet únicamente desde su
+                      computador de uso propio y de una red segura, absteniéndose de utilizar este servicio desde
+                      lugares públicos, computadoras y/o dispositivos móviles que no sean de uso personal, en caso de no
+                      hacerlo el Socio deberá asumir como propias las transacciones realizadas con claves de acceso que
+                      le hayan sido vulneradas y utilizadas fraudulentamente por terceros. Es decir que todo acceso o
+                      cualquier operación y transacción efectuados con el Usuario y CONTRASEÑA verificada y aceptada por
+                      los CANALES DIGITALES, se considerará como instrucción hecha expresamente por el SOCIO, por lo
+                      tanto, será considerada valida y auténtica, la cual tendrá la misma fuerza legal como si hubiera
+                      sido realizada y firmada personalmente por el titular.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">11</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      El acceso a canales y los servicios ofrecidos por la COAC
+                      podrán tener cargos financieros que estarán sujetos a
+                      aprobación del órgano de control, y que dichos cargos podrán
+                      sufrir alguna variación con el pasar del tiempo. Los cargos
+                      se encuentran expuestos para el conocimiento de los Socios
+                      en los medios señalados por la Superintendencia de Economía
+                      Popular y Solidaria SEPS del Ecuador, que son: 1°.-
+                      Remuneraciones por servicios en la Pizarra; 2°.- Página web
+                      de la Cooperativa Futuro Lamanense; 3°.- En los folletos de
+                      cargos que son entregados a los Socios. Producida la
+                      variación de los cargos, se entenderá como aceptación el
+                      pago si se continúa el uso los servicios ofrecidos por la
+                      Cooperativa mencionados en el presente contrato, en caso de
+                      estar en desacuerdo con la variación de los cargos de
+                      algunos de los servicios, se deberá señalar por escrito los
+                      servicios a los que se refiere, y expresar su decisión de no
+                      usar ni recibir tales servicios de parte de la Cooperativa.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">12</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      El plazo de vigencia de los términos y condiciones del uso
+                      de los canales digitales de La COAC FUTURO LAMANENSE y de
+                      los servicios financieros que se realicen a través de estos,
+                      es indefinido. Sin embargo, cualquiera de las partes podrá
+                      dar por terminado uno, algunos, o todos los servicios y
+                      acceso a canales establecidos, enviando una comunicación por
+                      escrito a la otra parte en tal sentido. El acceso a los
+                      canales electrónicos estará ligado a la contratación de
+                      algún producto o servicio financiero otorgado por la
+                      Cooperativa, y la terminación de los productos o servicios
+                      que el Socio mantuviere en la Cooperativa, implicará la
+                      terminación del uso de canales electrónicos que la
+                      Cooperativa le brinda al Socio.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">13</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      En caso de inconformidad o discrepancia en relación con los
+                      servicios financieros que se brinden a través de los canales
+                      electrónicos, el Socio podrá presentar los hechos a la
+                      Cooperativa de manera escrita, detallando y sustentando
+                      ampliamente el motivo de su reclamo, debiendo la Cooperativa
+                      proceder a dar atención al mismo analizando la procedencia o
+                      no del reclamo planteado, de acuerdo a la normativa
+                      correspondiente y a los contratos de servicios financieros
+                      que corresponda. En caso de divergencias o controversias,
+                      las partes afirman que se someten a lo establecido en los
+                      convenios de servicios y/o productos financieros suscritos y
+                      que correspondan de acuerdo al caso.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">14</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      En todo lo que no estuviere expresamente aquí contemplado,
+                      se entienden incorporadas las disposiciones de carácter
+                      general emitidas por la Junta de Política de Regulación
+                      Monetaria y Financiera, Superintendencia de Bancos,
+                      Superintendencia de Economía Popular y Solidaria y demás
+                      normativa pertinente de la República del Ecuador, así como
+                      en los convenios de servicios y/o productos financieros
+                      suscritos y que correspondan de acuerdo al caso.
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                  <div class="list-group-item-figure">
+                    <div class="tile tile-circle bg-primary">15</div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <p class="text-justify">
+                      La aceptación electrónica a los términos y condiciones
+                      contenido en el presente documento, se adecua a lo
+                      establecido en la Ley de Comercio Electrónico, Firmas
+                      Electrónicas y Mensajería de Datos, y su respectivo
+                      reglamento.
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <!-- .card -->
+          </div>
+          <!-- /.task-issue -->
+        </div>
+        <!-- /.task-body -->
+      </div>
+      <div class="form-label-group">
+        <br />
+        <p class="label">
+          <input type="checkbox" class="form" id="terminos" name="terminos" formControlName="terminos"
+            (click)="onChange()" />
+          | Acepta los terminos del servicio
+        </p>
+        <p class="col text-danger" *ngIf="NotValid('terminos')" style="font-size: small">
+          *Debe aceptar los terminis para el servicio
+        </p>
+      </div>
+    </div>
+    <!-- /.form-group -->
+    <!-- .form-group -->
+    <div class="form-group">
+      <br />
+      <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="registerForm.invalid || !terminos">
+        Registrar
+      </button>
+    </div>
+    <!-- /.form-group -->
+  </form>
+  <br />
+  <!-- /form -->
+  <!-- copyright -->
+  <app-footer></app-footer>
+</main>
+
+<!-- Modal comprobacion -->
+<div class="modal fade" id="comprobacionRegistro" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          <i class="fas fa-user-check"></i> Proceso de verificación
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <app-form-verificacion (codigo)="newCodigo($event)"></app-form-verificacion>
+          <div class="err-input rounded" *ngIf="codigoIncorrecto">
+            Este código es inválido!!
+          </div>
+          <br>
+          <div class="p-1">
+            <div class="card p-3">
+              <p class="text-justify">
+                Te enviamos un código a tu correo electrónico o mensaje de
+                texto, para verificar la autenticidad de la petición.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          <i class="fas fa-times"></i> Cancelar registro
+        </button>
+        <button type="button" class="btn btn-primary" [disabled]="codigoCorrecto == false"
+          (click)="closeComprobacion()">
+          <i class="fas fa-check"></i> Verificar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal password -->
+<div class="modal fade" id="asignarPasswordModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          <i class="fas fa-unlock-alt"></i> Asignar contraseña
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="card p-2 bg-warning">
+          <small>La contraseña debe tener al menos 6 caracteres y una combinación de
+            números, letras y caracteres especiales</small>
+        </div>
+
+        <div class="form-group">
+          <div class="input-wrapper">
+            <div class="form-label-group">
+              <input type="password" id="inputPassword2" class="form-control" placeholder="Clave" name="pass1"
+                [(ngModel)]="passwordCreate.password" [type]="getType()" autocomplete="off" />
+              <label for="inputPassword2">Contraseña</label>
+            </div>
+            <i class="fas fa-eye input-icon password cursorp" (click)="toggleTextPassword()" *ngIf="!passEstado"></i>
+            <i class="fas fa-eye-slash input-icon password cursorp" (click)="toggleTextPassword()"
+              *ngIf="passEstado"></i>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="form-group">
+          <div class="input-wrapper">
+            <div class="form-label-group">
+              <input type="password" id="inputPassword3" class="form-control" placeholder="Clave" name="pass2"
+                #pass2="ngModel" [(ngModel)]="passwordCreate.passwordV" (ngModelChange)="validarClaves()" required
+                [type]="getType2()" autocomplete="off" />
+              <label for="inputPassword3">Ingresar contraseña nuevamente</label>
+            </div>
+            <i class="fas fa-eye input-icon password cursorp" (click)="toggleTextPassword2()" *ngIf="!passEstado2"></i>
+            <i class="fas fa-eye-slash input-icon password cursorp" (click)="toggleTextPassword2()"
+              *ngIf="passEstado2"></i>
+          </div>
+        </div>
+
+        <div class="err-input rounded" *ngIf="estadoPassword == 'incorrecto'">
+          Las contraseñas no coinciden!!
+        </div>
+        <br />
+        <label *ngIf="claveAprobada == 2" class="debil">
+          Cotraseña débil
+        </label>
+        <label *ngIf="claveAprobada == 1" class="buena">
+          Cotraseña buena
+        </label>
+      </div>
+      <div class="modal-footer pt-4">
+        <button type="button" class="btn btn-primary" [disabled]="estadoPassword != 'correcto' || claveAprobada != 1"
+          (click)="registrarContrasenas()">
+          <i class="far fa-check-square"></i> Finalizar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

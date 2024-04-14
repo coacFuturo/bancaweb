@@ -1,0 +1,124 @@
+<app-header></app-header>
+
+<aside class="app-aside app-aside-expand-md app-aside-light">
+  <app-aside></app-aside>
+</aside>
+<main class="app-main">
+  <div class="wrapper">
+    <div class="page">
+      <div class="page-inner">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  <footer class="auth-footer">
+    <app-footer></app-footer>
+  </footer>
+</main>
+
+
+<app-spinner></app-spinner>
+
+<div class="modal fade" id="leyProteccionDatosPersonalesModal" data-backdrop="static" data-keyboard="false"
+  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header border-bottom pb-0">
+        <h4 class="modal-title" id="exampleModalLabel">
+          <b class="text-primary" style="font-weight: 500;">LEY DE PROTECCIÓN DE DATOS PERSONALES</b>
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <br>
+        <div class="text-center">
+          <h4 class="text-dark">
+            <b style="font-weight: 500;">AUTORIZACIÓN PARA EL TRATAMIENTO DE DATOS PERSONALES</b>
+          </h4>
+        </div>
+
+        <div class="container text-justify w-100">
+          <div class="text-center img-marca-agua">
+            <img src="../../assets/images/ddddd.png" class=" w-75">
+          </div>
+
+          <p>
+            Por medio del presente documento, autorizo de manera libre y voluntaria a COAC FUTURO LAMANENSE para que
+            conforme los términos establecidos legalmente se realice el tratamiento de mis datos personales, como la
+            recolección, intercambio, actualización, procesamiento, reproducción, compilación, almacenamiento,
+            circulación, sistematización de mi información personal que entrego o entregaré y en general la organización
+            de mis datos personales de forma parcial o total, en virtud de las relaciones comerciales, contractuales,
+            legales y/o de cualquier otra que surja en relación a los servicios o productos financieros y no financieros
+            que brinda esta Institución.
+          </p>
+          <p>
+            Para lo cual el tratamiento de DATOS tendrá las siguientes finalidades: elaborar y/o segmentar perfiles;
+            realizar análisis crediticios incluso mediante técnicas automáticas; desarrollar acciones comerciales de
+            productos y servicios financieros y/o comerciales; y/o, comercializar y promocionar (incluyendo el envío de
+            publicidad por cualquier medio) diferentes productos y servicios financieros y/o comerciales.
+          </p>
+          <p>
+            Entiendo que la información será utilizada directa o indirectamente para procesos pre-contractuales,
+            contractuales, pos-contractuales, comerciales, de atención al cliente y mercadeo, procesamiento, análisis,
+            investigación, estadísticas, referencias y demás trámites operativos para facilitar, promover, permitir o
+            mantener las relaciones con la Cooperativa, de igual forma autorizo a la Cooperativa o a cualquier
+            cesionario o endosatario para que, cuantas veces sean necesarias, obtenga de y/o valide con cualquier fuente
+            de información, incluyendo al Registro Civil, la Central de Riesgos, los burós de información crediticia, y
+            demás fuentes legales de información autorizados para operar en el país, las personas naturales y los
+            establecimientos de comercio, información sobre mi empleador, personas señaladas como referencias,
+            instituciones financieras de crédito, de cobranza, compañías emisoras o administradoras de tarjetas de
+            crédito y cualquier otra entidad, mis referencias personales y/o patrimoniales del pasado, del presente y
+            las que se generen en el futuro, sea como deudor principal, codeudor o garante, así como sobre mi
+            comportamiento crediticio, manejo de cuentas bancarias, tarjetas de crédito y, en general, sobre el
+            cumplimiento de mis obligaciones.
+          </p>
+          <p>
+            Faculto formalmente a la Cooperativa para transferir o entregar a las mismas personas o entidades la
+            información relacionada con mi comportamiento crediticio. En caso de que la Cooperativa ceda o transfiera
+            cartera adeudada por mí, el cesionario o adquiriente de la misma queda desde ahora expresamente facultado
+            para realizar las mismas actividades establecidas en el párrafo anterior.
+          </p>
+          <p>
+            Autorizo a que la COAC FUTURO LAMANENSE utilice mis datos para contactarme con fines informativos,
+            publicitarios y comerciales a través del servicio de telefonía o cualquier otro medio de comunicación
+            electrónica.
+          </p>
+          <p>
+            Adicionalmente, autorizo también a que la COAC FUTURO LAMANENSE dé tratamiento a mis datos personales a
+            través de terceros, para los fines arriba detallados, con cualquier persona natural o jurídica de derecho
+            público, privado, nacional o extranjera que la Cooperativa determine.
+          </p>
+          <p>
+            Entiendo y acepto que mi información personal podrá ser almacenada de manera impresa o digital, y será
+            accesada por los funcionarios de la COAC FUTURO LAMANENSE, estando obligados a cumplir con la legislación
+            aplicable a las políticas de confidencialidad, protección de datos y sigilo bancario. La COAC FUTURO
+            LAMANENSE conservará la información personal al menos durante el tiempo que dure la relación comercial y el
+            que sea necesario para cumplir con la normativa, respecto de la conservación de archivos.
+          </p>
+          <p>
+            Así mismo, declaro que conozco que la recolección y tratamiento de mis datos se realizará de conformidad con
+            normas legales expresas sobre protección de datos personales que resulten aplicables.
+          </p>
+          <p>
+            Manifiesto que, como titular de los datos, fui informado de los derechos con que cuento para conocer,
+            actualizar y rectificar mi información personal o revocar la autorización, lo cual podré ejercerlo a través
+            de un documento por escrito acudiendo a cualquiera de las agencias de la Cooperativa.
+          </p>
+          <p>
+            Por medio de la lectura de este documento manifiesto que he sido informado sobre el Tratamiento de Datos
+            Personales, y otorgo mi autorización de forma voluntaria y verídica, y en señal de aceptación suscribo el
+            presente documento.
+          </p>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="aceptarTratamientoDatosPersonales()">
+          ACEPTO
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

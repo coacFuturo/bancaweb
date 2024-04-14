@@ -1,0 +1,134 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title mb-0">
+        <i class="fas fa-key"></i> Cambiar contraseña
+      </h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-5">
+
+          <div *ngIf="passwordEstado == '' ||  passwordEstado == 'incorrecto' ">
+            <div class="form-group">
+              <div class="input-wrapper">
+                <div class="form-label-group">
+                  <input type="password" id="inputPassword" class="form-control"
+                    placeholder="Ingresar contraseña actual" [type]="getType()" autocomplete="off" name="claveactual"
+                    #passwordv="ngModel" [(ngModel)]="passwordVerificacion.password" />
+                  <label for="inputPassword">Ingresar contraseña actual</label>
+                  <p class="col text-danger" style="font-size: small"></p>
+                </div>
+                <i class="fas fa-eye input-icon password cursorp" (click)="toggleTextPassword()"
+                  *ngIf="!passEstado"></i>
+                <i class="fas fa-eye-slash input-icon password cursorp" (click)="toggleTextPassword()"
+                  *ngIf="passEstado"></i>
+              </div>
+            </div>
+            <div class="border border-danger p-2 text-danger rounded" *ngIf="passwordEstado == 'incorrecto'">
+              Contraseña incorrecta!!
+            </div>
+            <br />
+            <div class="text-right">
+              <button type="button" class="btn btn-primary" [disabled]="passwordv.invalid"
+                (click)="verificarClaveActual()">
+                <i class="fas fa-check"></i> Verificar
+              </button>
+            </div>
+          </div>
+
+
+          <div *ngIf="passwordEstado == 'correcto'">
+            <br>
+            <div class="alert alert-info" role="alert">
+              Te enviaremos un código de confirmación a tu correo electrónico o mensaje de
+              texto
+            </div>
+
+            <input type="text" class="form-control form-control-lg mt-2" name="codigoverificacion"
+              [(ngModel)]="codigoVerificacion" maxlength="6" placeholder="Ingresar código de confirmación"
+              (ngModelChange)="newCodigo()">
+
+            <div class="alert alert-danger mt-2" role="alert" *ngIf="codigoIncorrecto">
+              Este código es inválido!!
+            </div>
+
+            <div class="alert alert-success mt-2" role="alert" *ngIf="codigoCorrecto">
+              El código es correcto!!
+            </div>
+            <br>
+          </div>
+
+          <div *ngIf="verificacionCodigoSms">
+            <div class="container">
+              <div class="alert alert-warning mt-2 mb-3" role="alert">
+                Recuerda no ingresar contraseñas utilizadas anteriormente
+                <hr>
+                La contraseña debe tener al menos 6 caracteres y una
+                combinación de números, letras y caracteres
+                especiales
+              </div>
+
+              <div class="form-group">
+                <div class="input-wrapper">
+                  <div class="form-label-group">
+                    <input type="password" id="inputPassword" class="form-control"
+                      placeholder="Ingresar contraseña actual" [type]="getType2()" autocomplete="off" name="passw1"
+                      #passw1="ngModel" [(ngModel)]="passwordCreate.password" required />
+                    <label for="inputPassword">Ingresar nueva contraseña</label>
+                    <p class="col text-danger" style="font-size: small"></p>
+                  </div>
+                  <i class="fas fa-eye input-icon password cursorp" (click)="toggleTextPassword2()"
+                    *ngIf="!passEstado2"></i>
+                  <i class="fas fa-eye-slash input-icon password cursorp" (click)="toggleTextPassword2()"
+                    *ngIf="passEstado2"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-wrapper">
+                  <div class="form-label-group">
+                    <input type="password" id="inputPassword" class="form-control"
+                      placeholder="Ingresar contraseña actual" [type]="getType3()" autocomplete="off" name="passw2"
+                      #passw2="ngModel" [(ngModel)]="passwordCreate.passwordV" (ngModelChange)="validarClaves()"
+                      required />
+                    <label for="inputPassword">Ingresar contraseña nuevamente</label>
+                    <p class="col text-danger" style="font-size: small"></p>
+                  </div>
+                  <i class="fas fa-eye input-icon password cursorp" (click)="toggleTextPassword3()"
+                    *ngIf="!passEstado3"></i>
+                  <i class="fas fa-eye-slash input-icon password cursorp" (click)="toggleTextPassword3()"
+                    *ngIf="passEstado3"></i>
+                </div>
+              </div>
+
+              <div class="border border-danger p-2 text-danger rounded mt-2"
+                *ngIf="claveAprobada == 0 && passwordCreate.passwordV!= ''">
+                Las contraseñas no coinciden!!
+              </div>
+
+              <br />
+              <label *ngIf="claveAprobada == 2" class="debil">
+                Cotraseña débil
+              </label>
+              <label *ngIf="claveAprobada == 1" class="buena">
+                Cotraseña buena
+              </label>
+
+            </div>
+            <br />
+
+            <div class="text-right">
+              <button type="button" class="btn btn-primary" [disabled]="claveAprobada != 1" (click)="actualizarClave()">
+                <i class="fas fa-edit"></i> Actualizar
+              </button>
+            </div>
+          </div>
+
+
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

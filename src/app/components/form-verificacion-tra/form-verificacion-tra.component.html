@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2 pl-1 pr-1">
+      <input type="text" id="numt1" class="form-control form-control-lg text-center" maxlength="1" placeholder="#"
+        onkeyup="if (this.value.length == this.getAttribute('maxlength')) numt2.focus()" name="numt1" [(ngModel)]="numt1">
+    </div>
+    <div class="col-2 pl-1 pr-1">
+      <input type="text" id="numt2" class="form-control form-control-lg text-center" maxlength="1" placeholder="#"
+        onkeyup="if (this.value.length == this.getAttribute('maxlength')) numt3.focus()" name="numt2" [(ngModel)]="numt2">
+    </div>
+    <div class="col-2 pl-1 pr-1">
+      <input type="text" id="numt3" class="form-control form-control-lg text-center" maxlength="1" placeholder="#"
+        onkeyup="if (this.value.length == this.getAttribute('maxlength')) numt4.focus()" name="numt3" [(ngModel)]="numt3">
+    </div>
+    <div class="col-2 pl-1 pr-1">
+      <input type="text" id="numt4" class="form-control form-control-lg text-center" maxlength="1" placeholder="#"
+        onkeyup="if (this.value.length == this.getAttribute('maxlength')) numt5.focus()" name="numt4" [(ngModel)]="numt4">
+    </div>
+    <div class="col-2 pl-1 pr-1">
+      <input type="text" id="numt5" class="form-control form-control-lg text-center" maxlength="1" placeholder="#"
+        onkeyup="if (this.value.length == this.getAttribute('maxlength')) numt6.focus()" name="numt5" [(ngModel)]="numt5">
+    </div>
+    <div class="col-2 pl-1 pr-1">
+      <input type="text" id="numt6" class="form-control form-control-lg text-center" maxlength="1" placeholder="#"
+        (keyup)="enviarCodigo()" name="numt6" [(ngModel)]="numt6">
+    </div>
+  </div>
+</div>

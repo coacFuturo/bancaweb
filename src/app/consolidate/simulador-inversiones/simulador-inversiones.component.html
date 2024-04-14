@@ -1,0 +1,162 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-lg-6">
+          <h3><span class="menu-icon oi oi-graph"></span> Simulador de inversiones</h3>
+        </div>
+        <div class="col-lg-6 text-right">
+          <button class="btn btn-danger" (click)="limpiarCampos()">
+            <i class="fas fa-broom"></i> Limpiar
+          </button>
+          <button class="btn btn-primary ml-3" (click)="consultarInveriones()" [disabled]="formSimInversion.invalid">
+            <i class="fas fa-calculator"></i> Calcular
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="container-fluid">
+        <form #formSimInversion="ngForm" id="formSimInversion">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label class="mb-1">Tipo de depósito</label>
+                <select class="custom-select" name="tipodeposito" #tipodeposito="ngModel"
+                  [(ngModel)]="simuladInversionCreate.codigoTipoDeposito" required>
+                  <option *ngFor="let x of tipoDepositoss" [value]="x.codigo">{{x.nombre}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label class="mb-1">Plazo en días</label>
+                <input type="number" class="form-control" name="plazodias" #plazodias="ngModel"
+                  [(ngModel)]="simuladInversionCreate.plazoEnDias" required>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="form-group">
+                <label class="mb-1">Monto</label>
+                <input type="text" class="form-control" name="monto" #monto="ngModel"
+                  [(ngModel)]="simuladInversionCreate.monto" required>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label class="mb-1">Número de días periodicos</label>
+                <select class="custom-select" name="numperiodico" #numperiodico="ngModel"
+                  [(ngModel)]="simuladInversionCreate.numeroDiasPeriodico" required>
+                  <option value="30">Mensual</option>
+                  <option value="60">BiMensual</option>
+                  <option value="90">Trimestral</option>
+                  <option value="180">Semestral</option>
+                  <option value="360">Anual</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <hr>
+      <div class="text-right" *ngIf="inversionData">
+        <button class="btn btn-info" (click)="descargarResultadosSimulador()">
+          <i class="fas fa-download"></i> descargar
+        </button>
+      </div>
+
+      <div class="p-3" id="simuladorInversionesCalculo" style="font-weight: lighter;" *ngIf="inversionData">
+        <div class="container pt-3 pl-5">
+          <div class="row">
+            <div class="col-3 p-0">
+              <img src="../../../assets/images/lghorizontal.svg" style="width: 250px;">
+            </div>
+            <div class="col-7">
+              <div class="text-center">
+                <br>
+                <h1>TABLA PRESUNTIVA DE INVERSIONES</h1>
+              </div>
+            </div>
+            <div class="col-2"></div>
+          </div>
+          <br>
+          <div class="row pt-3" style=" font-size: medium;">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Interes</b>
+                </div>
+                <div class="col-6">
+                  {{Interes |currency:"USD":"symbol"}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Monto</b>
+                </div>
+                <div class="col-6">
+                  {{Monto |currency:"USD":"symbol"}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Plazo en días</b>
+                </div>
+                <div class="col-6">
+                  {{PlazoEnDias}}
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Retencion</b>
+                </div>
+                <div class="col-6">
+                  {{Retencion |currency:"USD":"symbol"}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Tasa</b>
+                </div>
+                <div class="col-6">
+                  {{Tasa}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Total recibir</b>
+                </div>
+                <div class="col-6">
+                  {{TotalRecibir |currency:"USD":"symbol"}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table class="table mt-5 table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Cuota</th>
+              <th scope="col">Capital</th>
+              <th scope="col">Fecha pago</th>
+              <th scope="col">Interés</th>
+              <th scope="col">Retención</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of cuotas">
+              <td>{{x.NumeroCuotas}}</td>
+              <td>{{x.Capital |currency:"USD":"symbol"}}</td>
+              <td>{{x.FechaPago}}</td>
+              <td>{{x.Interes |currency:"USD":"symbol"}}</td>
+              <td>{{x.Retencion |currency:"USD":"symbol"}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3><span class="menu-icon oi oi-graph"></span> Simulador de ahorro programado</h3>
+                </div>
+                <div class="col-lg-6 text-right">
+                    <button class="btn btn-danger" (click)="limpiarCampos()">
+                      <i class="fas fa-broom"></i> Limpiar
+                    </button>
+                    <button class="btn btn-primary ml-3" [disabled]="formSimAhorro.invalid" (click)="simuladorAhorro()">
+                        <i class="fas fa-calculator"></i> Calcular
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="container-fluid">
+                <form #formSimAhorro="ngForm" id="formSimAhorro">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="mb-1">Monto de apertura</label>
+                                <input type="text" class="form-control" name="montoapertura" #montoapertura="ngModel"
+                                    [(ngModel)]="simulaAhorroCreate.montoApertura" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="mb-1">Plazo en días</label>
+                                <input type="number" class="form-control" name="plazodia" #plazodia="ngModel"
+                                    [(ngModel)]="simulaAhorroCreate.plazoEnDias" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="mb-1">Días que realiza el ahorro</label>
+                                <input type="number" class="form-control" name="fechafin" #fechafin="ngModel"
+                                    [(ngModel)]="simulaAhorroCreate.fechaCancelacion" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class="mb-1">Ahorro mensual</label>
+                                <input type="text" class="form-control" name="aumentocapital" #aumentocapital="ngModel"
+                                    [(ngModel)]="simulaAhorroCreate.aumentoCapital" required>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr>
+            <div class="text-right" *ngIf="ahorroData">
+                <button class="btn btn-primary" (click)="descargarResultadosSimulador()">
+                  <i class="fas fa-download"></i> Descargar
+                </button>
+            </div>
+
+            <div class="p-3" id="printresultsumuladorahorropro" style="font-weight: lighter;" *ngIf="ahorroData">
+                <div class="container pt-2 pl-5">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="text-center">
+                        <img src="../../../assets/images/lghorizontal.svg" class="w-100">
+                      </div>
+                    </div>
+                    <div class="col-lg-8">
+                      <br> <br>
+                      <div class="text-center">
+                        <h2>TABLA PRESUNTIVA AHORRO PROGRAMADO</h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <table class="table mt-5 table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cuota</th>
+                            <th scope="col">Capital</th>
+                            <th scope="col">Fecha pago</th>
+                            <th scope="col">Interés</th>
+                            <th scope="col">Aumento capital</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let x of ahorroData">
+                            <td>{{x.NumeroCuota}}</td>
+                            <td>{{x.capital}}</td>
+                            <td>{{x.FechaPago}}</td>
+                            <td>{{x.Interes}}</td>
+                            <td>{{x.AumentoCapital}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>

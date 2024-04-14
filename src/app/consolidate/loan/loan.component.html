@@ -1,0 +1,145 @@
+<div class="container-fluid" *ngIf="Prestamos">
+    <div class="card">
+        <div class="card-header mb-0">
+            <h3 class="card-title mb-0">Prestamo {{ numeroPrestamo }}</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3">
+                    <div class="metric">
+                        <select class="custom-select" id="exampleFormControlSelect1" (change)="scanearPrestamos($event.target.value)">
+                            <option *ngFor="let prestamo of Prestamos" [value]="prestamo.NumeroPrestamo"
+                                [selected]="prestamo.NumeroPrestamo == numeroPrestamo">
+                                {{ prestamo.NumeroPrestamo }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="metric">
+                        <h6 class="metric-value mb-1">
+                            {{ tipoPrestamo }}
+                        </h6>
+                        <p class="metric-label mt-0">Tipo</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="metric">
+                        <h4 class="metric-value mb-1">
+                            {{ numeroCuotas }}
+                        </h4>
+                        <p class="metric-label mt-0">Cuotas</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="metric">
+                        <h4 class="metric-value mb-1">
+                            {{ proximaCuota | number: "1.2" }}
+                        </h4>
+                        <p class="metric-label mt-0">Proxima cuota</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <div class="metric">
+                        <h4 class="metric-value mb-1">
+                            {{ deudaInicial | number: "1.2" }}
+                        </h4>
+                        <p class="metric-label mt-0">Deuda inicial</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="metric">
+                        <h4 class="metric-value mb-1">
+                            {{ saldoActual | number: "1.2" }}
+                        </h4>
+                        <p class="metric-label mt-0">Saldo actual</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="metric">
+                        <h4 class="metric-value mb-1">
+                            {{ oficina }}
+                        </h4>
+                        <p class="metric-label mt-0">Oficina</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="metric">
+                        <h4 class="metric-value mb-1">
+                            {{ mascaraFechas(proximaFecha) }}
+                        </h4>
+                        <p class="metric-label mt-0">Proximo pago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Moviminetos {{ numeroPrestamo }}</h3>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Documento</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Oficina</th>
+                                    <th scope="col">Cuota</th>
+                                    <th scope="col">Transaccion</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Usuario</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let x of movements">
+                                    <th scope="row">{{x.Documento}}</th>
+                                    <td>{{mascaraFechas(x.Fecha)}}</td>
+                                    <td>{{x.Oficina}}</td>
+                                    <td>{{x.Cuota}}</td>
+                                    <td>{{x.Transaccion}}</td>
+                                    <td>{{x.Total}}</td>
+                                    <td>{{x.Usuario}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center" *ngIf="movementsEstado == 'esperando'">
+                        <div class="d-flex justify-content-center mt-3">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden"></span>
+                            </div>
+                        </div>
+                        <p class="text-primary mt-2">Cargando...</p>
+                    </div>
+
+                    <div class="text-center p-3 mt-3" *ngIf="movementsEstado == 'sin-datos'">
+                        <h3>No existen movimientos!!</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="!Prestamos">
+    <div class="card p-4 text-center">
+        <h2>No hay prestamos vigentes</h2>
+
+        <hr> <br>
+
+        <h4>¿Quieres saber más de nuestros créditos?</h4>
+        <div class="text-center">
+            <button class="btn btn-primary" style="width: 150px;" (click)="irACreditos()">
+                Ir a créditos
+            </button>
+        </div>
+    </div>
+</div>

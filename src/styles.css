@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: lighter;
+}
+
+.err-input {
+  background-color: rgb(250, 150, 150);
+  margin-top: 3px;
+  padding-left: 4px;
+  padding-top: 3px;
+  color: rgb(0, 0, 0);
+}
+
+.debil {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: red;
+  background-color: rgb(248, 209, 209);
+}
+
+.buena {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: green;
+  background-color: rgb(220, 255, 220);
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-icon {
+  color: #191919;
+  position: absolute;
+  font-size: 18px;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.cursorp {
+  cursor: pointer;
+}
+
+.img-marca-agua {
+  position: absolute;
+  top: 14%;
+  opacity: 0.2;
+}

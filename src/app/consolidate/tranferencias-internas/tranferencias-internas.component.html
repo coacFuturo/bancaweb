@@ -1,0 +1,331 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title mb-0">
+        <i class="fas fa-exchange-alt"></i> Transferencias internas
+      </h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="card">
+            <div class="card-header">
+              <div class="row mb-0">
+                <div class="col-lg-7">
+                  <h4 class="card-title mb-0">
+                    <i class="fas fa-users"></i> Beneficiarios registrado
+                  </h4>
+                </div>
+                <div class="col-lg-5 text-right">
+                  <button class="btn btn-outline-primary btn-sm mb-0" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fas fa-user-plus"></i> Agregar
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-sm">
+                  <tbody>
+                    <tr *ngFor="let x of beneficiarios">
+                      <td class="pt-2">{{ x.nick }}</td>
+                      <td class="pt-2">{{ x.numerocliente }}</td>
+                      <td class="text-right">
+                        <button class="btn btn-outline-info btn-sm" (click)="
+                            seleccionBenedficiario(
+                              x.numerocliente,
+                              x.nick,
+                              x._id,
+                              x.nombre
+                            )
+                          ">
+                          <i class="far fa-hand-pointer"></i> Seleccionar
+                        </button>
+                        <button class="btn btn-danger btn-sm ml-2" (click)="eliminarBeneficiario(x._id)">
+                          <i class="far fa-trash-alt"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="card">
+            <div class="card-header pb-1 pt-2">
+              <div class="row">
+                <div class="col-lg-8">
+                  <h2 class="card-title pt-1 mb-3">
+                    <i class="fas fa-money-check-alt"></i> Realizar transferencias
+                  </h2>
+                </div>
+                <div class="col-lg-4 text-center pt-0 pb-0 border-left">
+                  <h5 class="titulo-saldo mb-0">Saldo disponible:</h5>
+                  <h2 class="mb-0">${{ cuentaSaldo | number: "1.2" }}</h2>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container mt-0">
+                <label class="mb-1 mt-0" *ngIf="variasCuentas == true">De la cuenta:</label>
+                <select class="custom-select mb-3" id="exampleFormControlSelect1" name="secuencialCuenta" [(ngModel)]="secuencialCuenta" (click)="selecciondeCuenta()" *ngIf="variasCuentas == true">
+                  <option *ngFor="let cuenta of cuentasAhorros" value="{{cuenta.secuencial}}">
+                    {{cuenta.tipo}} - ${{ cuenta.cuentaSaldo | number: "1.2" }}
+                  </option>
+                </select>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <label class="mb-1 mt-2">Monto:</label>
+                    <input type="text" class="form-control montotxt text-center" placeholder="0.00" autocomplete="off"
+                      name="monto" [(ngModel)]="Monto" (paste)="$event.preventDefault()"
+                      (ngModelChange)="verificarSaldo(); mascara(this,cpf)" />
+                    <div class="border border-danger mt-1 p-2 rounded text-danger" *ngIf="saldoInsuficiente"
+                      style="font-size: 15px;">
+                      ¡Saldo insuficiente!. Debe quedar al menos 5 dólares en su cuenta.
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="card p-2">
+                      <label class="border-bottom mt-2">Beneficiario:</label>
+                      <p class="mb-2 text-center mt-2">
+                        {{ benefSelecNick }} - {{ benefSelecNumero }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="text-right mt-4">
+                  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#transferenciaModal"
+                    [disabled]="
+                      Monto == '' || benefSelecNumero == '' || saldoInsuficiente
+                    ">
+                    <i class="fas fa-check-double"></i> Realizar transferencia
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Agregar beneficiario-->
+<div class="modal fade" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <i class="fas fa-user-plus"></i> Agregar beneficiario
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <form #formBeneficiario="ngForm" id="formBeneficiario">
+            <div class="row mb-3">
+              <div class="col-lg-6">
+                <label class="mb-0">Email</label>
+                <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="beneficiario.email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+                <div class="err-input rounded" *ngIf="email.invalid && email.touched">
+                  Campo inválido!!
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="mb-0">Cédula/Pasaporte</label>
+                <input type="text" class="form-control" name="cedula" #cedula="ngModel"
+                  [(ngModel)]="beneficiario.identificacion" maxlength="13" required />
+                <div class="err-input rounded" *ngIf="cedula.invalid && cedula.touched">
+                  Campo inválido!!
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="mb-0">Nick</label>
+                <input type="text" class="form-control" name="nick" #nick="ngModel" [(ngModel)]="beneficiario.nick"
+                  required />
+                <div class="err-input rounded" *ngIf="nick.invalid && nick.touched">
+                  Campo inválido!!
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="mb-0">Número de cuenta</label>
+                <input type="text" class="form-control" name="cuenta" #cuenta="ngModel"
+                  [(ngModel)]="beneficiario.cuenta" required />
+                <div class="err-input rounded" *ngIf="cuenta.invalid && cuenta.touched">
+                  Campo inválido!!
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-8">
+                <button type="button" class="btn btn-primary" (click)="solicitarCodigo()"
+                  *ngIf="!formBeneficiario.invalid">
+                  <i class="far fa-envelope"></i> Enviar codigo de verificación
+                </button>
+              </div>
+              <div class="col-lg-12">
+                <br>
+                <div class="bg-info mb-2 mt-2 p-2 rounded text-white" *ngIf="codigoEnviado">
+                  Se ha enviado un mensaje de texto con el código de verificación.
+                </div>
+                <app-form-verificacion (codigo)="newCodigo($event)" *ngIf="codigoEnviado"></app-form-verificacion>
+
+                <div class="border border-danger text-danger rounded p-2 mt-2" *ngIf="codigoIncorrecto">
+                  Este código es inválido!!
+                </div>
+
+
+
+                <div class="border border-success text-success rounded p-2 mt-2" *ngIf="codigoCorrecto">
+                  El código es correcto!!
+                </div>
+
+                <div class="border bg-danger border-danger text-white rounded p-2 mt-2" *ngIf="errorMsg != ''">
+                  ERROR: {{errorMsg}}
+                </div>
+
+              </div>
+            </div>
+            <br>
+            <div class="text-right border-top pt-2">
+              <button class="btn btn-primary btn-lg" [disabled]="!codigoCorrecto" (click)="agregarVeneficiario()">
+                <i class="far fa-save"></i> Registrar
+              </button>
+            </div>
+          </form>
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="transferenciaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <i class="fas fa-money-check-alt"></i> Transferencia
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class=" text-center border-bottom">
+            <h1>Confirmación de transferencia</h1>
+          </div>
+          <br>
+          <h2 class="mb-0">Beneficiario:</h2>
+          <div class="text-center">
+            <h3 class="mb-1">{{ benefSelecNombre }}</h3>
+            <h3>{{ benefSelecNumero }}</h3>
+          </div>
+          <h2 class="mb-0">Monto:</h2>
+          <div class="row justify-content-center">
+            <div class="col-lg-4">
+              <div class="text-center">
+                <div class="card pt-3">
+                  <h1>$ {{ Monto }}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="text-right">
+            <button class="btn btn-danger" (click)="closeModalTranfer()">
+              <i class="far fa-window-close"></i> Cancelar
+            </button>
+            <button class="btn btn-primary ml-2" (click)="realizarTransferencia()">
+              <i class="far fa-check-square"></i> Confirmar
+            </button>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal comprobante -->
+<div class="modal fade" id="modalComprobante" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <br />
+        <div class="p-2" id="comprobanteTransferenciaInterna">
+          <div style="text-align: center">
+            <img src="../../../assets/images/logo-flm.png" class="w-50" />
+          </div>
+          <div class="text-center">
+            <h3 class="mb-0 mt-2">Comprobante de transferencia</h3>
+          </div>
+          <div class="container mt-3 mb-2">
+            <b>Estimado/a:</b> {{ nombrePropietario }}
+          </div>
+          <table class="table">
+            <tbody>
+              <tr>
+
+              </tr>
+              <tr>
+                <td>Has realizado una transferencia de:</td>
+                <td class="text-right">${{ Monto }}</td>
+              </tr>
+              <tr>
+                <td>Comprobante:</td>
+                <td class="text-right">{{ numeroDocumentoRecibido }}</td>
+              </tr>
+              <tr>
+                <td>Fecha:</td>
+                <td class="text-right">
+                  {{ fechaActual() }} {{ horaActual() }}
+                </td>
+              </tr>
+              <tr>
+                <td>De la cuenta:</td>
+                <td class="text-right">
+                  {{ cuentaNumero | slice: 0:3 }}XXXXXX{{
+                  cuentaNumero | slice: 9:12
+                  }}
+                </td>
+              </tr>
+              <tr>
+                <td>A la cuenta:</td>
+                <td class="text-right">{{ benefSelecNumero }}</td>
+              </tr>
+              <tr>
+                <td>Beneficiario:</td>
+                <td class="text-right">{{ benefSelecNombre }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModalComprobante()">
+          <i class="far fa-window-close"></i> Cerrar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="descargarComprobante()">
+          <i class="fas fa-print"></i> Imprimir
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-spinner></app-spinner>

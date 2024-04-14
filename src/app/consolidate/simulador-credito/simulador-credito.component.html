@@ -1,0 +1,226 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-lg-6">
+          <h3><span class="menu-icon oi oi-graph"></span> Simulador de crédito</h3>
+        </div>
+        <div class="col-lg-6 text-right">
+          <button class="btn btn-danger" (click)="limpiarCampos()">
+            <i class="fas fa-broom"></i> Limpiar
+          </button>
+          <button class="btn btn-primary ml-3" (click)="consultarCredito()" [disabled]="formSimCredito.invalid">
+            <i class="fas fa-calculator"></i> Calcular
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="container-fluid">
+        <form #formSimCredito="ngForm" id="formSimCredito">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="mb-1">Tipo de préstamo</label>
+                <select class="custom-select" name="tipoprestamo" #tipoprestamo="ngModel"
+                  [(ngModel)]="simuladorCrediCreate.tipoPrestamo" (change)="getTipoTabla()" required>
+                  <option *ngFor="let x of tipoPrestamo" [value]="x.codigo">{{x.Nombre}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="mb-1">Tipo de tabla</label>
+                <select class="custom-select" name="tipotabla" #tipotabla="ngModel"
+                  [(ngModel)]="simuladorCrediCreate.tipoTabla" required>
+                  <option *ngFor="let x of tipoTabla" [value]="x.secuencial">{{x.nombre}}
+                    {{x.codigoGeneracionVencimientoCuota}} <label *ngIf="x.esConAlicuota"> - Con
+                      Alicuota</label></option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="mb-1">Segmento interno</label>
+                <select class="custom-select" name="segmentoint" #segmentoint="ngModel"
+                  [(ngModel)]="simuladorCrediCreate.segmentoInterno" (change)="getSubcalificacion()" required>
+                  <option *ngFor="let x of segmentoInterno" [value]="x.secuencial">{{x.nombre}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="mb-1">SubCalificación</label>
+                <select class="custom-select" name="subcalificacion" #subcalificacion="ngModel"
+                  [(ngModel)]="simuladorCrediCreate.subcalificacion" required>
+                  <option *ngFor="let x of subCalificacion" [value]="x.codigo">{{x.nombre}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="form-group">
+                <label class="mb-1">Fecha</label>
+                <input type="date" class="form-control" name="fecha" #fecha="ngModel"
+                  [(ngModel)]="simuladorCrediCreate.fecha" required>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <div class="form-group">
+                <label class="mb-1">Monto</label>
+                <input type="text" class="form-control" name="monto" #monto="ngModel"
+                  [(ngModel)]="simuladorCrediCreate.monto" required>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="row">
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="mb-1">Día fijo</label>
+                    <input type="number" class="form-control" name="diafijo" #diafijo="ngModel"
+                      [(ngModel)]="simuladorCrediCreate.diaFijo" required>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="mb-1">No de cuotas</label>
+                    <input type="number" class="form-control" name="numcuotas" #numcuotas="ngModel"
+                      [(ngModel)]="simuladorCrediCreate.numCuotas" required>
+                    <div class="err-input rounded" *ngIf="simuladorCrediCreate.numCuotas < 2 && numcuotas.touched">
+                      No. de cuotas debe ser mayor a 2
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <hr>
+      <div class="text-right" *ngIf="creditoData">
+        <button class="btn btn-info" (click)="descargarResultadosSimulador()">
+          <i class="fas fa-download"></i> Descargar
+        </button>
+      </div>
+
+      <div class="respuesta p-3" id="printresultsumuladorcredito" style="font-weight: lighter;" *ngIf="creditoData">
+        <div class="container pt-2 pl-5">
+          <div class="row">
+            <div class="col-4 p-0">
+              <img src="../../../assets/images/lghorizontal.svg" class="w-100">
+            </div>
+            <div class="col-8">
+              <div class="text-center">
+                <br> <br>
+                <h1>TABLA PRESUNTIVA DE PAGOS</h1>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row pt-3" style=" font-size: medium;">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Tipo prestamo</b>
+                </div>
+                <div class="col-6">
+                  {{DescripcionTipoPrestamo}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>No. cuotas</b>
+                </div>
+                <div class="col-6">
+                  {{NumeroCuotas}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Frecuencia de pago</b>
+                </div>
+                <div class="col-6">
+                  {{FrecuenciaPago}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Monto solicitado</b>
+                </div>
+                <div class="col-6">
+                  {{MontoSolicitado |currency:"USD":"symbol"}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Tasa total anual</b>
+                </div>
+                <div class="col-6">
+                  {{ValorTasa |currency:"USD":"symbol"}}
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Fecha de adjudicación</b>
+                </div>
+                <div class="col-6">
+                  {{mascaraFechas(FechaAdjudicacion)}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Fecha de vencimiento</b>
+                </div>
+                <div class="col-6">
+                  {{mascaraFechas(FechaVencimiento)}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Deuda inicial</b>
+                </div>
+                <div class="col-6">
+                  {{DeudaInicial |currency:"USD":"symbol"}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-right border">
+                  <b>Valor a entregar</b>
+                </div>
+                <div class="col-6">{{ValorAEntregar |currency:"USD":"symbol"}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table class="table mt-5 table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Cuota</th>
+              <th scope="col">Fecha de pago</th>
+              <th scope="col">Capital</th>
+              <th scope="col">Interés</th>
+              <th scope="col">Otros</th>
+              <th scope="col">Total</th>
+              <th scope="col">Saldo capital</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of cuotas">
+              <td>{{x.NumeroCuota}}</td>
+              <td>{{mascaraFechas(x.FechaPago)}}</td>
+              <td>{{x.ValorCapital |currency:"USD":"symbol"}}</td>
+              <td>{{x.ValorInteres |currency:"USD":"symbol"}}</td>
+              <td>{{x.ValorOtros |currency:"USD":"symbol"}}</td>
+              <td>{{x.ValorTotal |currency:"USD":"symbol"}}</td>
+              <td>{{x.SaldoCapital |currency:"USD":"symbol"}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

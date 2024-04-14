@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2 pl-1 pr-1">
+      <input type="text" id="num1" class="form-control form-control-lg text-center" maxlength="1" placeholder="#"
+        onkeyup="if (this.value.length == this.getAttribute('maxlength')) num2.focus()" name="num1" [(ngModel)]="num1">
+    </div>
+    <div class="col-2 pl-1 pr-1">
+      <input type="text" id="num2" class="form-control form-control-lg text-center" maxlength="1" placeholder="#"
+        onkeyup="if (this.value.length == this.getAttribute('maxlength')) num3.focus()" name="num2" [(ngModel)]="num2">
+    </div>
+    <div class="col-2 pl-1 pr-1">
+      <input type="text" id="num3" class="form-control form-control-lg text-center" maxlength="1" placeholder="#"
+        onkeyup="if (this.value.length == this.getAttribute('maxlength')) num4.focus()" name="num3" [(ngModel)]="num3">
+    </div>
+    <div class="col-2 pl-1 pr-1">
+      <input type="text" id="num4" class="form-control form-control-lg text-center" maxlength="1" placeholder="#"
+        onkeyup="if (this.value.length == this.getAttribute('maxlength')) num5.focus()" name="num4" [(ngModel)]="num4">
+    </div>
+    <div class="col-2 pl-1 pr-1">
+      <input type="text" id="num5" class="form-control form-control-lg text-center" maxlength="1" placeholder="#"
+        onkeyup="if (this.value.length == this.getAttribute('maxlength')) num6.focus()" name="num5" [(ngModel)]="num5">
+    </div>
+    <div class="col-2 pl-1 pr-1">
+      <input type="text" id="num6" class="form-control form-control-lg text-center" maxlength="1" placeholder="#"
+        (keyup)="enviarCodigo()" name="num6" [(ngModel)]="num6">
+    </div>
+  </div>
+</div>

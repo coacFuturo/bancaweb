@@ -1,0 +1,17 @@
+.titulo-saldo {
+    font-size: 13px;
+}
+
+.btw {
+    width: 100%;
+}
+
+.err-input {
+    background-color: rgb(250, 150, 150);
+    color: rgb(0, 0, 0);
+}
+
+.montotxt {
+    font-size: 27px;
+    height: 58px;
+}

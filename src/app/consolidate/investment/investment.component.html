@@ -1,0 +1,55 @@
+<div class="card" *ngIf="Inversiones">
+  <div class="card-header">
+    <h3 class="card-title mb-0">Inversiones</h3>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Producto</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Interes</th>
+            <th scope="col">Fecha creación</th>
+            <th scope="col">Fecha vencimiento</th>
+            <th scope="col">TasaEfectiva</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let x of Inversiones">
+            <td>{{ x.NombreProducto }}</td>
+            <td>{{ x.NombreTipoDeposito }}</td>
+            <td>{{ x.Monto }}</td>
+            <td>{{ x.NombreEstadoDeposito }}</td>
+            <td>{{ x.InteresCalculado }}</td>
+            <td>{{ mascaraFechas(x.FechaCreacion) }}</td>
+            <td>{{ mascaraFechas(x.FechaVencimiento) }}</td>
+            <td>{{ x.TasaEfectiva }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="!Inversiones">
+  <div class="card p-4 text-center">
+    <br />
+    <h2>No hay inversiones vigentes</h2>
+    <hr />
+    <br />
+
+    <h4>¿Quieres saber más de nuestros productos de inversión?</h4>
+    <div class="text-center">
+      <button
+        class="btn btn-primary"
+        style="width: 150px"
+        (click)="irAPlazoFijo()"
+      >
+        Ir a Plazo Fijo
+      </button>
+    </div>
+  </div>
+</div>

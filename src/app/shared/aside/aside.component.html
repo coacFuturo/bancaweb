@@ -1,0 +1,145 @@
+<div class="aside-content">
+  <header class="aside-header d-block d-md-none">
+    <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside">
+      <span class="user-avatar user-avatar-lg"><img src="assets/images{{ img }}" alt="" /></span>
+      <span class="account-icon"><span class="fa fa-caret-down fa-lg"></span></span>
+      <span class="account-summary"><span class="account-name">Hola {{ nick }}</span>
+        <span class="account-description">{{ nombre }}</span></span>
+    </button>
+    <div id="dropdown-aside" class="dropdown-aside collapse">
+      <div class="pb-3">
+        <a class="dropdown-item cursor" href="#"><span class="dropdown-icon oi oi-person"></span> Cambiar Clave</a>
+        <hr />
+        <a class="dropdown-item cursor" (click)="logout()"><span class="dropdown-icon oi oi-account-logout"></span>
+          Cerrar
+          Sesión</a>
+      </div>
+    </div>
+  </header>
+  <div class="aside-menu overflow-hidden">
+    <nav id="stacked-menu" class="stacked-menu">
+      <ul class="menu">
+        <li class="menu-item has-child has-active">
+          <a class="menu-link" [routerLink]="['/banca/cuentas']"><span class="menu-icon fas fa-home"></span>
+            <span class="menu-text">Consolidado</span></a>
+          <ul class="menu">
+            <li class="menu-item">
+              <a [routerLink]="['/banca/cuentas']" class="menu-link">
+                <i class="fas fa-align-center"></i> Cuentas
+              </a>
+            </li>
+            <li class="menu-item">
+              <a [routerLink]="['/banca/prestamos']" class="menu-link">
+                <i class="fas fa-file-invoice-dollar"></i> Prestamos
+              </a>
+            </li>
+            <li class="menu-item">
+              <a [routerLink]="['/banca/inversiones']" class="menu-link">
+                <i class="fas fa-chart-line"></i> Inversiones
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item has-child has-active">
+          <a href="#" class="menu-link"><span class="menu-icon oi oi-project"></span>
+            <span class="menu-text">Transferencias</span>
+          </a>
+          <ul class="menu">
+            <li class="menu-item">
+              <a href="page-clients.html" [routerLink]="['/banca/tranferencias-internas']" class="menu-link">
+                <i class="fas fa-exchange-alt"></i> Internas
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="page-teams.html" [routerLink]="['/banca/tranferencias-interbancarias']" class="menu-link">
+                <i class="fas fa-random"></i> Interbancarias
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="page-teams.html" [routerLink]="['/banca/comprobantes']" class="menu-link">
+                <i class="fas fa-receipt"></i> Comprobantes
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item has-child has-active">
+          <a class="menu-link"><span class="menu-icon oi oi-graph"></span>
+            <span class="menu-text">Simuladores</span>
+          </a>
+          <ul class="menu">
+            <li class="menu-item">
+              <a href="page-clients.html" [routerLink]="['/banca/simulador-credito']" class="menu-link">
+                <i class="fas fa-hand-holding-usd"></i> Crédito
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="page-teams.html" [routerLink]="['/banca/simulador-inversiones']" class="menu-link">
+                <i class="fas fa-coins"></i> Inversiones
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="page-teams.html" [routerLink]="['/banca/simulador-ahorro-programado']" class="menu-link">
+                <i class="fas fa-wallet"></i> Ahorro programado
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item has-child has-active">
+          <a class="menu-link"><span class="menu-icon oi oi-browser"></span>
+            <span class="menu-text">Servicios</span>
+          </a>
+          <ul class="menu">
+            <li class="menu-item">
+              <a href="page-clients.html" [routerLink]="['/banca/facturas']" class="menu-link">
+                <i class="fas fa-file-alt"></i> Consultar Facturas
+              </a>
+            </li>
+            <li class="menu-item" *ngIf="odontologiaEstado == true">
+              <a href="page-clients.html" [routerLink]="['/banca/servicio-odontologia']" class="menu-link">
+                <i class="fas fa-tooth"></i> Odontología
+              </a>
+            </li>
+            <li class="menu-item" *ngIf="peluqueriaEstado == true">
+              <a href="page-clients.html" [routerLink]="['/banca/servicio-peluqueria']" class="menu-link">
+                <i class="fas fa-chair"></i> Peluquería
+              </a>
+            </li>
+            <li class="menu-item" *ngIf="medicinaEstado == true">
+              <a href="page-clients.html" [routerLink]="['/banca/medicina-general']" class="menu-link">
+                <i class="fas fa-stethoscope"></i> Medicina general
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="https://solicitudcredito.futurolamanense.fin.ec" target="_blank" class="menu-link">
+                <i class="fas fa-poll-h"></i> Solicitud de crédito
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item has-child has-active">
+          <a class="menu-link"><span class="menu-icon oi oi-person"></span>
+            <span class="menu-text">Mi cuenta</span>
+          </a>
+          <ul class="menu">
+            <li class="menu-item">
+              <a href="page-clients.html" [routerLink]="['/banca/cambiar-clave']" class="menu-link">
+                <i class="fas fa-key"></i> Cambiar contraseña
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="page-clients.html" [routerLink]="['/banca/inicios-sesion']" class="menu-link">
+                <i class="fas fa-history"></i> Inicios de sesión
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="page-clients.html" (click)="logout()" class="menu-link text-danger">
+                <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</div>
